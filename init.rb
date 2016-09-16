@@ -56,6 +56,7 @@ Redmine::Plugin.register :redmine_backlogs do
   version 'v1.0.6'
 
   settings :default => {
+                         :story_status_update_rules => '[]'
                          :story_trackers            => nil,
                          :default_story_tracker     => nil,
                          :task_tracker              => nil,

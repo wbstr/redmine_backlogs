@@ -7,10 +7,25 @@
     td.selected { font-weight: bold; }
     td.ok { background-color:#00FF00 }
     td.error { background-color:#FF0000 }
+
+    table td .center { text-align: center; }
   </style>
 <%- end %>
 
 <script type="text/javascript">
+  function remove_story_status_update_rule(a) {
+    var td = a.parentNode;
+    var tr = td.parentNode;
+    var tbody = tr.parentNode;
+    var trs = Array.prototype.slice.call(tbody.children);
+    var ruleIndex = trs.indexOf(tr);
+
+    // remove tr from table
+    tbody.removeChild(tr);
+
+    console.log(ruleIndex);
+  }
+
   function enable_apply()
   {
     tasktracker = RB.$("#settings_task_tracker").val();
@@ -187,6 +202,53 @@
       Backlogs.setting[:show_priority]) %>
 </p>
 </fieldset>
+
+<!-- start of WCS -->
+<fieldset>
+  <legend>WCS fejlesztések</legend>
+
+  <%
+
+    # Backlogs.setting[:story_status_update_rules] = [
+    #     RbStoryStatusUpdateRule.of([111], 11, 1),
+    #     RbStoryStatusUpdateRule.of([222], 22, 2, false),
+    #     RbStoryStatusUpdateRule.of([333], 33, 3, true)
+    # ].to_json
+
+    text_field_tag(
+          'settings[story_status_update_rules]',
+          Backlogs.setting[:story_status_update_rules],
+          type: 'hidden')
+  %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Original story statuses</th>
+        <th>New task status</th>
+        <th>New Story status</th>
+        <th>Check all task?</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody id="asdfasdf">
+      <%
+        rules = Backlogs.setting[:story_status_update_rules]
+        rules = RbStoryStatusUpdateRule.rules_from_json(rules)
+        rules.each do |rule|
+      %>
+          <tr>
+            <td><%= rule.original_story_statuses %></td>
+            <td class="center"><%= rule.new_task_status %></td>
+            <td class="center"><%= rule.new_story_status %></td>
+            <td class="center"><%= rule.check_all_task %></td>
+            <td class="center"><a onclick="remove_story_status_update_rule(this)">remove</a></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</fieldset>
+<!-- end of WCS -->
 
 <fieldset>
   <legend><%= l(:backlogs_burndown_settings) %></legend>
