@@ -24,6 +24,12 @@
     tbody.removeChild(tr);
 
     console.log(ruleIndex);
+
+    var textAreaVal = $('#settings_story_status_update_rules').val();
+    var rules = JSON.parse(textAreaVal);
+
+        .splice(1,1)
+    JSON.stringify()
   }
 
   function enable_apply()
@@ -207,18 +213,20 @@
 <fieldset>
   <legend>WCS fejlesztések</legend>
 
-  <%
+  <%=
 
     # Backlogs.setting[:story_status_update_rules] = [
-    #     RbStoryStatusUpdateRule.of([111], 11, 1),
-    #     RbStoryStatusUpdateRule.of([222], 22, 2, false),
-    #     RbStoryStatusUpdateRule.of([333], 33, 3, true)
+    #     RbStoryStatusUpdateRule.of([2], 13, 12, true),   # story status in [folyamatban]       && all task->kész    => story->tesztelésreVár
+    #     RbStoryStatusUpdateRule.of([1,12], 2, 2, false), # story status in [uj,tesztelésreVár] && task->folyamatban => story->folyamatban
+    #     RbStoryStatusUpdateRule.of([12], 1, 2, false)    # story status in [tesztelésreVár]    && task->új          => story->folyamatban
     # ].to_json
 
-    text_field_tag(
+    text_area_tag(
           'settings[story_status_update_rules]',
           Backlogs.setting[:story_status_update_rules],
-          type: 'hidden')
+          # type: 'hidden'
+          rows: 5
+    )
   %>
 
   <table>
@@ -231,7 +239,7 @@
         <th>Remove</th>
       </tr>
     </thead>
-    <tbody id="asdfasdf">
+    <tbody>
       <%
         rules = Backlogs.setting[:story_status_update_rules]
         rules = RbStoryStatusUpdateRule.rules_from_json(rules)
