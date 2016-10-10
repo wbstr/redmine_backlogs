@@ -99,6 +99,18 @@ RB.Task = RB.Object.create(RB.Issue, {
       this.$.children('.remaining_hours.editor').val('');
       this.$.children('.remaining_hours.editable').text('');
     }
+  },
+
+  afterRefreshTooltip: function(task){
+    if (!task || typeof task.getType !== 'function' || task.getType() !== RB.Task.getType()) return;
+
+    var swimlane = task.$.closest('tr.story-swimlane');
+    swimlane.find('div.story').each(function(){
+      var story = {
+        $: RB.$(this)
+      };
+      RB.util.refreshToolTip(story);
+    })
   }
   
 });

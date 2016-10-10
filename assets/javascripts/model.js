@@ -33,6 +33,10 @@ RB.Model = RB.Object.create({
     // Do nothing. Child objects may optionally override this
   },
 
+  afterRefreshTooltip: function(model){
+    // Task will override
+  },
+
   beforeSave: function(){
     // Do nothing. Child objects may or may not override this method
   },
@@ -323,6 +327,7 @@ RB.Model = RB.Object.create({
         model = this;
     }
     RB.util.refreshToolTip(model);
+    model.afterRefreshTooltip(model);
   },
   
   unmarkError: function(){
