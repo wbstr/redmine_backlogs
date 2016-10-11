@@ -13,24 +13,87 @@
 <%- end %>
 
 <script type="text/javascript">
-  function remove_story_status_update_rule(a) {
-    var td = a.parentNode;
-    var tr = td.parentNode;
-    var tbody = tr.parentNode;
-    var trs = Array.prototype.slice.call(tbody.children);
-    var ruleIndex = trs.indexOf(tr);
+  RBWCS = {
+    StoryUpdateRule: {
 
-    // remove tr from table
-    tbody.removeChild(tr);
+      add: function() {
+        var rules = this.getRules();
+        var index = parseInt($('#newRuleIndex').val());
 
-    console.log(ruleIndex);
+        if (rules.length < index) return;
 
-    var textAreaVal = $('#settings_story_status_update_rules').val();
-    var rules = JSON.parse(textAreaVal);
+        var newRule = {
+          original_story_statuses: JSON.parse($('#newRuleOrigStoryStatus').val()),
+          new_task_status: parseInt($('#newRuleNewTaskStatus').val()),
+          new_story_status: parseInt($('#newRuleNewStoryStatus').val()),
+          check_all_task: $('#newRuleCheckAllTask').val() === 'true',
+          description: $('#newRuleDescription').val()
+        };
 
-        .splice(1,1)
-    JSON.stringify()
-  }
+        // add to json in textarea
+        rules.splice(index, 0, newRule);
+        this.setRules(rules);
+
+        this.refreshTableByTextarea();
+      },
+
+      remove: function(index) {
+        // remove from json in textarea
+        var rules = this.getRules();
+        rules.splice(parseInt(index), 1);
+        this.setRules(rules);
+
+        this.refreshTableByTextarea();
+      },
+
+      refreshTableByTextarea: function() {
+        var rules = this.getRules();
+        var tbody = $('#storyStatusUpdateRuleTable');
+        tbody.empty();
+        if (rules.length == 0) {
+          tbody.append('<tr><td colspan="7">there are no rules yet</td></tr>');
+        } else {
+          for(var i = 0; i < rules.length; i++) {
+            tbody.append(this.ruleToTr(i, rules[i]));
+          }
+        }
+        tbody.append(this.inputRow);
+      },
+
+      getRules: function() {
+        var textArea = $('#settings_story_status_update_rules');
+        return JSON.parse(textArea.val());
+      },
+
+      setRules: function(rules) {
+        var textArea = $('#settings_story_status_update_rules');
+        textArea.val(JSON.stringify(rules));
+      },
+
+      ruleToTr: function(index, rule) {
+        var tr = "<tr>";
+        tr += "<td class=\"center\">" + index + "</td>";
+        tr += "<td>[" + rule.original_story_statuses.join(', ') + "]</td>";
+        tr += "<td class=\"center\">" + rule.new_task_status + "</td>";
+        tr += "<td class=\"center\">" + rule.new_story_status + "</td>";
+        tr += "<td class=\"center\">" + rule.check_all_task + "</td>";
+        tr += "<td class=\"center\">" + rule.description + "</td>";
+        tr += "<td class=\"center\"><a onclick=\"RBWCS.StoryUpdateRule.remove(" + index + ");\">remove</a></td>";
+        tr += "</tr>";
+        return tr;
+      },
+
+      inputRow: '<tr>' +
+          '<td class="center"><input type="text" id="newRuleIndex" placeholder="index" style="width:60px; text-align:center;"></td>' +
+          '<td><input type="text" id="newRuleOrigStoryStatus" placeholder="[array of id\'s]" style="width:200px;"></td>' +
+          '<td class="center"><input type="text" id="newRuleNewTaskStatus" placeholder="status id" style="width:70px; text-align:center;"></td>' +
+          '<td class="center"><input type="text" id="newRuleNewStoryStatus" placeholder="status id" style="width:70px;"></td>' +
+          '<td class="center"><input type="text" id="newRuleCheckAllTask" placeholder="true/false" style="width:80px; text-align:center;"></td>' +
+          '<td><input type="text" id="newRuleDescription" placeholder="description (optional)" style="width:300px;"></td>' +
+          '<td class="center"><a onclick="RBWCS.StoryUpdateRule.add()">add</a></td>' +
+          '</tr>'
+    }
+  };
 
   function enable_apply()
   {
@@ -211,50 +274,24 @@
 
 <!-- start of WCS -->
 <fieldset>
-  <legend>WCS fejlesztések</legend>
-
-  <%=
-
-    # Backlogs.setting[:story_status_update_rules] = [
-    #     RbStoryStatusUpdateRule.of([2], 13, 12, true),   # story status in [folyamatban]       && all task->kész    => story->tesztelésreVár
-    #     RbStoryStatusUpdateRule.of([1,12], 2, 2, false), # story status in [uj,tesztelésreVár] && task->folyamatban => story->folyamatban
-    #     RbStoryStatusUpdateRule.of([12], 1, 2, false)    # story status in [tesztelésreVár]    && task->új          => story->folyamatban
-    # ].to_json
-
-    text_area_tag(
-          'settings[story_status_update_rules]',
-          Backlogs.setting[:story_status_update_rules],
-          # type: 'hidden'
-          rows: 5
-    )
-  %>
-
+  <legend>Story status update rules</legend>
+  <!-- this hidden input stores the actual data, and at saving this will post the new config -->
+  <%= text_field_tag('settings[story_status_update_rules]', Backlogs.setting[:story_status_update_rules], type: 'hidden') %>
   <table>
     <thead>
       <tr>
+        <th>Index</th>
         <th>Original story statuses</th>
         <th>New task status</th>
         <th>New Story status</th>
         <th>Check all task?</th>
+        <th>Description</th>
         <th>Remove</th>
       </tr>
     </thead>
-    <tbody>
-      <%
-        rules = Backlogs.setting[:story_status_update_rules]
-        rules = RbStoryStatusUpdateRule.rules_from_json(rules)
-        rules.each do |rule|
-      %>
-          <tr>
-            <td><%= rule.original_story_statuses %></td>
-            <td class="center"><%= rule.new_task_status %></td>
-            <td class="center"><%= rule.new_story_status %></td>
-            <td class="center"><%= rule.check_all_task %></td>
-            <td class="center"><a onclick="remove_story_status_update_rule(this)">remove</a></td>
-          </tr>
-      <% end %>
-    </tbody>
+    <tbody id="storyStatusUpdateRuleTable"><!-- will be populated by script --></tbody>
   </table>
+  <script type="text/javascript">RBWCS.StoryUpdateRule.refreshTableByTextarea();</script>
 </fieldset>
 <!-- end of WCS -->
 
