@@ -15,6 +15,7 @@
   <%= stylesheet_link_tag 'jquery/jquery.multiselect.css', :plugin => 'redmine_backlogs' %>
   <%= stylesheet_link_tag 'taskboard.css', :plugin => 'redmine_backlogs', :media => 'print,screen' %>
   <%= stylesheet_link_tag 'taskboard_print.css', :plugin => 'redmine_backlogs', :media => 'print' %>
+  <%= stylesheet_link_tag 'taskboard_story_metadata.css', :plugin => 'redmine_backlogs' %>
 
   <script type="text/javascript"
           src="<%= url_for(:controller => 'rb_server_variables',
@@ -126,6 +127,14 @@
               <span class="v"><%= story.project.id %></span>
             </div>
           <%- end %>
+          <div class="metadata">
+            <% if User.current.backlogs_preference[:show_story_status_on_taskboard] == '1' %>
+              <div class="status_id"><%= story.status %></div>
+            <% end %>
+            <% if User.current.backlogs_preference[:show_story_priority_on_taskboard] == '1' %>
+              <div class="priority_id"><%= story.priority %></div>
+            <% end %>
+          </div>
           <div class="story_points editable" fieldname="story_points" fieldlabel="<%=l(:field_story_points)%>"><%= story.story_points %></div>
         </div>
       </td>

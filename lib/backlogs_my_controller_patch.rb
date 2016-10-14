@@ -24,6 +24,9 @@ module Backlogs
           else
             flash[:notice] = "Invalid task color code #{color}"
           end
+
+          User.current.backlogs_preference[:show_story_status_on_taskboard] = (params[:backlogs] || {})[:show_story_status_on_taskboard]
+          User.current.backlogs_preference[:show_story_priority_on_taskboard] = (params[:backlogs] || {})[:show_story_priority_on_taskboard]
         end
       end
     end

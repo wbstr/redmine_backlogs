@@ -298,6 +298,10 @@ module BacklogsPlugin
 
       def view_my_account(context={ })
         begin
+          show_story_status_on_taskboard_hash = {:value => '1'}
+          show_story_status_on_taskboard_hash[:checked] = 'checked' if context[:user].backlogs_preference[:show_story_status_on_taskboard] == '1'
+          show_story_priority_on_taskboard_hash = {:value => '1'}
+          show_story_priority_on_taskboard_hash[:checked] = 'checked' if context[:user].backlogs_preference[:show_story_priority_on_taskboard] == '1'
           return %{
             </fieldset>
             <fieldset class="box tabular">
@@ -305,6 +309,14 @@ module BacklogsPlugin
             <p>
               #{label :backlogs, l(:field_task_color)}
               #{text_field :backlogs, :task_color, :value => context[:user].backlogs_preference[:task_color]}
+            </p>
+            <p>
+              #{label :backlogs, l(:field_show_story_status_on_taskboard)}
+              #{check_box :backlogs, :show_story_status_on_taskboard, show_story_status_on_taskboard_hash}
+            </p>
+            <p>
+              #{label :backlogs, l(:field_show_story_priority_on_taskboard)}
+              #{check_box :backlogs, :show_story_priority_on_taskboard, show_story_priority_on_taskboard_hash}
             </p>
           }
         rescue => e
