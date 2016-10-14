@@ -4,7 +4,8 @@
     left: -5px;
 }
 
-#taskboard #tasks .story-swimlane .story .status_id, .priority_id {
+#taskboard #tasks .story-swimlane .story .status_id,
+#taskboard #tasks .story-swimlane .story .priority_id {
     height: 13px;
     padding-right: 5px;
     padding-left: 5px;
