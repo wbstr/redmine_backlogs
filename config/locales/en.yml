@@ -102,6 +102,8 @@ en:
   field_release_relationship: "Release relationship"
   field_release_start_date: "Release start date"
   field_remaining_hours: "Remaining (hours)"
+  field_show_story_priority_on_taskboard: "Show story priority on taskboard"
+  field_show_story_status_on_taskboard: "Show story status on taskboard"
   field_story_points: "Story points"
   field_subject: Subject
   field_task_color: "Task color"

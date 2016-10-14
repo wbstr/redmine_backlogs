@@ -1,0 +1,30 @@
+#taskboard #tasks .story-swimlane .story .metadata {
+    position: absolute;
+    bottom: -5px;
+    left: -5px;
+}
+
+#taskboard #tasks .story-swimlane .story .status_id, .priority_id {
+    height: 13px;
+    padding-right: 5px;
+    padding-left: 5px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: #ed820c;
+    color: #fff;
+    font-size: 9px;
+    display: inline-block;
+}
+
+#taskboard #tasks .story-swimlane .story .status_id {
+    margin-right: -6px;
+}
+
+#taskboard #tasks .story-swimlane .story .priority_id {
+}
+
+#taskboard #tasks .story-swimlane .story .story_points {
+    height: 15px;
+    line-height: 15px;
+    border-radius: 5px;
+}
