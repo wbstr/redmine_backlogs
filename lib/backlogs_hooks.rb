@@ -262,11 +262,36 @@ module BacklogsPlugin
       end
 
       def view_my_account(context={ })
+        color_hash = {
+            :value => '1'
+        }
+
+        color_hash[:checked] = "checked" if context[:user].backlogs_preference[:show_backlog_story_color] == '1'
+
+        full_name_hash = {
+            :value => '1'
+        }
+
+        full_name_hash[:checked] = "checked" if context[:user].backlogs_preference[:show_assigned_to_full] == '1'
+
+        short_name_hash = {
+            :value => '1'
+        }
+
+        short_name_hash[:checked] = "checked" if context[:user].backlogs_preference[:show_assigned_to_short] == '1'
+
+        category_hash = {
+            :value => '1'
+        }
+
+        category_hash[:checked] = "checked" if context[:user].backlogs_preference[:show_category] == '1'
+
+        show_story_status_on_taskboard_hash = {:value => '1'}
+        show_story_status_on_taskboard_hash[:checked] = 'checked' if context[:user].backlogs_preference[:show_story_status_on_taskboard] == '1'
+        show_story_priority_on_taskboard_hash = {:value => '1'}
+        show_story_priority_on_taskboard_hash[:checked] = 'checked' if context[:user].backlogs_preference[:show_story_priority_on_taskboard] == '1'
+
         begin
-          show_story_status_on_taskboard_hash = {:value => '1'}
-          show_story_status_on_taskboard_hash[:checked] = 'checked' if context[:user].backlogs_preference[:show_story_status_on_taskboard] == '1'
-          show_story_priority_on_taskboard_hash = {:value => '1'}
-          show_story_priority_on_taskboard_hash[:checked] = 'checked' if context[:user].backlogs_preference[:show_story_priority_on_taskboard] == '1'
           return %{
             </fieldset>
             <fieldset class="box tabular">
@@ -283,7 +308,24 @@ module BacklogsPlugin
               #{label :backlogs, l(:field_show_story_priority_on_taskboard)}
               #{check_box :backlogs, :show_story_priority_on_taskboard, show_story_priority_on_taskboard_hash}
             </p>
+            <p>
+              #{label :backlogs, l(:field_show_backlog_story_color)}
+              #{check_box :backlogs, :show_backlog_story_color, color_hash}
+            </p>
+            <p>
+            #{label :backlogs, l(:field_show_assigned_to_full)}
+            #{check_box :backlogs, :show_assigned_to_full, full_name_hash}
+            </p>
+            <p>
+              #{label :backlogs, l(:field_show_assigned_to_short)}
+              #{check_box :backlogs, :show_assigned_to_short, short_name_hash}
+            </p>
+            <p>
+              #{label :backlogs, l(:field_show_category)}
+              #{check_box :backlogs, :show_category, category_hash}
+            </p>
           }
+
         rescue => e
           exception(context, e)
           return ''
