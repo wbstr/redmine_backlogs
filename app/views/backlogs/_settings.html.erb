@@ -62,7 +62,8 @@
 
       getRules: function() {
         var textArea = $('#settings_story_status_update_rules');
-        return JSON.parse(textArea.val());
+        var textAreaVal = textArea.val().length == 0 ? '[]' : textArea.val();
+        return JSON.parse(textAreaVal);
       },
 
       setRules: function(rules) {
