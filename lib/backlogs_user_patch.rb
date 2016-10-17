@@ -16,9 +16,7 @@ module Backlogs
           value = "##{value}" if value =~ /^[0-9A-F]{6}$/i
           raise "Color format must be 6 hex digit string or empty, supplied value: #{value.inspect}" unless value == '' || value =~ /^#[0-9A-F]{6}$/i
           value.upcase!
-        when :show_story_status_on_taskboard
-          value = '0' unless value == '1'
-        when :show_story_priority_on_taskboard
+        when :show_story_status_on_taskboard, :show_story_priority_on_taskboard
           value = '0' unless value == '1'
         else
           raise "Unsupported attribute '#{attr}'"
@@ -53,8 +51,7 @@ module Backlogs
             value = self[:task_color].to_s
             value = Backlogs::Color.new(value).lighten(0.5) unless value == ''
 
-          when :show_story_status_on_taskboard
-          when :show_story_priority_on_taskboard
+          when :show_story_status_on_taskboard, :show_story_priority_on_taskboard
           else
             raise "Unsupported attribute '#{attr}'"
         end
