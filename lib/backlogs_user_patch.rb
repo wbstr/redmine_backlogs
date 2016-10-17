@@ -52,6 +52,7 @@ module Backlogs
             value = Backlogs::Color.new(value).lighten(0.5) unless value == ''
           when :show_backlog_story_color , :show_assigned_to_full, :show_assigned_to_short, :show_category, :show_story_status_on_taskboard, :show_story_priority_on_taskboard
 
+          when :show_story_status_on_taskboard, :show_story_priority_on_taskboard
           else
             raise "Unsupported attribute '#{attr}'"
         end
