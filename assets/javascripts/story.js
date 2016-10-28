@@ -50,34 +50,43 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
   },
 
   setAllowedStatuses: function(tracker, status) {
-    var tracker_id = tracker.val();
-    var user_status = this.$.find(".user_status").text();
-    var status_id = status.val();
+    var tracker_id = tracker.val(); console.log('tracker_id', tracker_id);
+    var user_status = this.$.find(".user_status").text(); console.log('user_status', user_status);
+    var status_id = status.val(); console.log('status_id', status_id);
 
     // right after creation, no menu exists to pick from
-    if (!status_id) { status_id = RB.constants.story_states['default']; }
-
+    if (!status_id) { status_id = RB.constants.story_states['default']; console.log('nincs status_id'); }
+    //                                                    1           -c-a         2
+    //                                                                             1
     var states = RB.constants.story_states['transitions'][tracker_id][user_status][status_id];
-    if (!states) { states = RB.constants.story_states['transitions'][tracker_id][user_status][RB.constants.story_states['transitions'][tracker_id][user_status]['default']]; }
+    if (!states) { states = RB.constants.story_states['transitions'][tracker_id][user_status][RB.constants.story_states['transitions'][tracker_id][user_status]['default']]; console.log('javított states ', states.toString());}
+    else {console.log('states ', states.toString());}
 
     if (RB.$.inArray(status_id, states) == -1) { // a non-available state is currently selected, tracker has changed
+      console.log('in array...');
       status_id = null;
 
       if (this.$.find('.tracker_id .v').text() == tracker_id) { // if we're switching back to the original tracker, select the original state
         status_id = this.$.find('.status_id .v').text();
+        console.log('switching to original tracker, status_id is ', status_id);
       } else { // pick first available
         if (states.length > 0) {
           status_id = states[0];
+          console.log('picking first available, status_id is ', status_id);
         }
       }
     }
 
-    status.empty();
+    status.empty(); console.log('emptying...');
+    console.log('states.length ', states.length);
     for (var i = 0; i < states.length; i++) {
+      console.log('adding option ', i);
       option = RB.$('<option/>');
       state = RB.constants.story_states['states'][states[i]];
+      console.log('...state name='+state.name+' closed='+state.closed);
+      console.log('...states[i] ', states[i]);
       option.attr('value', states[i]).addClass(state.closed).text(state.name);
-      if (states[i] == status_id) { option.attr('selected', 'selected'); }
+      if (states[i] == status_id) { option.attr('selected', 'selected'); console.log('...selected');}
       status.append(option);
     }
   },
