@@ -28,5 +28,21 @@
 </select>
 
 <div id="story_template">
-  <%= render :partial => 'rb_stories/story', :object => RbStory.new %>
+  <%
+		parameters = {
+				# :author => User.current,
+				# :project => @project
+		}
+
+		# We set the tracker to the default in the story, because in the tracker selector the same option will be selected
+		# by default and we want the status selector to select it's default status by default and it is calculated as the
+		# story's tracker's default status.
+    default_story_tracker_id = Backlogs.settings[:default_story_tracker]
+    parameters[:tracker_id] = default_story_tracker_id if default_story_tracker_id
+
+		# template_story = RbStory.new({:tracker_id => default_story_tracker_id, :author => User.current, :project => @project})
+		template_story = RbStory.new(parameters)
+		# statuses_for_new = template_story.new_statuses_allowed_to
+  %>
+  <%= render :partial => 'rb_stories/story', :object => template_story %>
 </div>
