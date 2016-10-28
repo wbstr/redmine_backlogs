@@ -174,9 +174,9 @@ class RbStory < Issue
     # lft and rgt fields are handled by acts_as_nested_set
     attribs = params.select{|k,v| !['prev', 'next', 'id', 'lft', 'rgt'].include?(k) && RbStory.column_names.include?(k) }
 
-    attribs[:status] = RbStory.class_default_status
     attribs = Hash[*attribs.flatten]
     s = RbStory.new(attribs)
+    s.safe_attributes = {'status_id' => attribs['status_id']} if attribs.include?('status_id')
     s.save!
     s.position!(params)
 
