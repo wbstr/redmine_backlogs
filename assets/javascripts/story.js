@@ -50,6 +50,7 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
   },
 
   setAllowedStatuses: function(tracker, status) {
+    var isNew = tracker.closest('li.story').attr('id') == undefined;
     var tracker_id = tracker.val();
     var user_status = this.$.find(".user_status").text();
     var status_id = status.val();
@@ -57,8 +58,15 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
     // right after creation, no menu exists to pick from
     if (!status_id) { status_id = RB.constants.story_states['default']; }
 
-    var states = RB.constants.story_states['transitions'][tracker_id][user_status][status_id];
-    if (!states) { states = RB.constants.story_states['transitions'][tracker_id][user_status][RB.constants.story_states['transitions'][tracker_id][user_status]['default']]; }
+    var states;
+    if (isNew) {
+      states = RB.constants.story_states['initial_statuses'][tracker_id];
+    } else {
+      states = RB.constants.story_states['transitions'][tracker_id][user_status][status_id];
+      if (!states) {
+        states = RB.constants.story_states['transitions'][tracker_id][user_status][RB.constants.story_states['transitions'][tracker_id][user_status]['default']];
+      }
+    }
 
     if (RB.$.inArray(status_id, states) == -1) { // a non-available state is currently selected, tracker has changed
       status_id = null;
