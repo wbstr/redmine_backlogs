@@ -7,7 +7,8 @@ module RbServerVariablesHelper
   #   workflow_transitions(RbStory)
   def workflow_transitions(klass)
      roles = User.current.admin ? Role.all : User.current.roles_for_project(@project)
-     transitions = {:states => {}, :transitions => {} , :default => 1 }
+     transitions = {:states => {}, :transitions => {} , :default => 1, :initial_statuses => {}}
+     transitions[:initial_statuses] = initial_statuses(klass, roles)
 
      klass.trackers.each {|tracker_id|
       tracker = Tracker.find(tracker_id)
@@ -45,4 +46,31 @@ module RbServerVariablesHelper
      }
      transitions
    end
+
+  private
+
+  def initial_statuses(klass, roles)
+    initial_statuses = {}
+    WorkflowTransition.
+      where(
+        :old_status_id => 0,
+        :role_id => roles.map(&:id),
+        :tracker_id => klass.trackers,
+        :author => false,
+        :assignee => false
+      ).
+      order(
+        :tracker_id => :asc,
+        :new_status_id => :asc).
+      pluck(:tracker_id, :new_status_id).
+      uniq.
+      each do |tracker_to_status|
+        tracker_id = tracker_to_status[0]
+        initial_statuses[tracker_id] = [] unless initial_statuses[tracker_id]
+        tracker_statuses = initial_statuses[tracker_id]
+        tracker_statuses << tracker_to_status[1]
+      end
+    initial_statuses
+  end
+
 end
