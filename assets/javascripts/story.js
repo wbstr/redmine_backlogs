@@ -56,9 +56,7 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
     var status_id = status.val();
 
     // right after creation, no menu exists to pick from
-    if (!status_id) {
-      status_id = RB.constants.story_states['default'];
-    }
+    if (!status_id) { status_id = RB.constants.story_states['default']; }
 
     var states;
     if (isNew) {
@@ -87,9 +85,7 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
       option = RB.$('<option/>');
       state = RB.constants.story_states['states'][states[i]];
       option.attr('value', states[i]).addClass(state.closed).text(state.name);
-      if (states[i] == status_id) {
-        option.attr('selected', 'selected');
-      }
+      if (states[i] == status_id) { option.attr('selected', 'selected'); }
       status.append(option);
     }
   },
