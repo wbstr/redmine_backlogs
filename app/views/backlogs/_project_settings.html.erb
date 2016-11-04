@@ -32,6 +32,20 @@
   <%= check_box_tag("settings[show_in_scrum_stats]", 'enabled',
       @project.rb_project_settings.show_in_scrum_stats) %>
 </p>
+<p>
+  <%
+    global_tracker_option = Tracker.new
+    global_tracker_option.id = 0
+    global_tracker_option.name = l(:backlogs_use_globally_selected_default_story_tracker_for_project)
+
+    trackers = [global_tracker_option]
+    trackers += [*@project.trackers]
+  %>
+  <%= content_tag(:label, l(:backlogs_default_story_tracker)) %>
+  <%= select_tag("settings[default_story_tracker]",
+      options_from_collection_for_select(trackers, :id, :name, @project.rb_project_settings.default_story_tracker)) %>
+  <%= content_tag(:label, l(:backlogs_note_for_default_story_tracker_for_project)) %>
+</p>
 </div>
 <%= submit_tag(l(:button_save)) %>
 <% end %>
