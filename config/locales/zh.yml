@@ -15,6 +15,7 @@ zh:
   backlogs_new_story_position_bottom: "新故事底部 (需要重启)"
   backlogs_new_story_position_top: "新故事顶部 (需要重启)"
   backlogs_not_all_themes_are_supported: 无法支持全部主题
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: 产品条目页配置
   backlogs_points_burn_direction: 点数消耗
   backlogs_product_backlog: 产品条目
@@ -71,6 +72,7 @@ zh:
   backlogs_story_tracker: 故事跟踪
   backlogs_task: 任务
   backlogs_task_tracker: 任务跟踪
+  backlogs_use_globally_selected_default_story_tracker_for_project: "Use global setting"
   backlogs_wiki_template: 冲刺的wiki页面的模板
   button_edit_wiki: 编辑wiki页面
   comma_delimited_numbers: "Comma delimited numbers"

@@ -15,6 +15,7 @@ de:
   backlogs_new_story_position_bottom: "unten (neustart erforderlich)"
   backlogs_new_story_position_top: oben
   backlogs_not_all_themes_are_supported: "Nicht alle Stile (themes) sind unterstützt."
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: "Product Backlog Ansicht"
   backlogs_points_burn_direction: "Burnup/-down Punkte"
   backlogs_product_backlog: "Produkt Backlog"
@@ -71,6 +72,7 @@ de:
   backlogs_story_tracker: "Story Tracker"
   backlogs_task: Aufgabe
   backlogs_task_tracker: "Aufgaben Tracker"
+  backlogs_use_globally_selected_default_story_tracker_for_project: "Use global setting"
   backlogs_wiki_template: "Vorlage für das Sprint-Wiki"
   button_edit_wiki: "Wiki Seite bearbeiten"
   comma_delimited_numbers: "Mittels Komma getrennte Zahlenwerte"

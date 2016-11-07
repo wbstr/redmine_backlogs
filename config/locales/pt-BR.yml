@@ -15,6 +15,7 @@ pt-BR:
   backlogs_new_story_position_bottom: "embaixo (necessita reiniciar)"
   backlogs_new_story_position_top: top
   backlogs_not_all_themes_are_supported: "Nem todos os temas são suportados."
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: "Configurações de página do product backlog"
   backlogs_points_burn_direction: "Pontos usados subir/descer"
   backlogs_product_backlog: "Product Backlog"
@@ -71,6 +72,7 @@ pt-BR:
   backlogs_story_tracker: "Sequência da estória"
   backlogs_task: Tarefas
   backlogs_task_tracker: "Sequência da tarefa"
+  backlogs_use_globally_selected_default_story_tracker_for_project: "Use global setting"
   backlogs_wiki_template: "Modelo para a página wiki sprint"
   button_edit_wiki: "Editar a página no wiki"
   comma_delimited_numbers: "números delimitados por vírgula"

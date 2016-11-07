@@ -15,6 +15,7 @@ tr:
   backlogs_new_story_position_bottom: "alt (yeniden başlatma gerektirir)"
   backlogs_new_story_position_top: üst
   backlogs_not_all_themes_are_supported: "Tüm temalar desteklenmemekte."
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: "Ürün bekleme listesi ayarları"
   backlogs_points_burn_direction: "Puanlar burn up/down"
   backlogs_product_backlog: "Ürün bekleme listesi"
@@ -71,6 +72,7 @@ tr:
   backlogs_story_tracker: "Öykü iş tipleri"
   backlogs_task: Görev
   backlogs_task_tracker: "Görev türü"
+  backlogs_use_globally_selected_default_story_tracker_for_project: "Use global setting"
   backlogs_wiki_template: "Sprint wiki sayfası için şablon."
   button_edit_wiki: "Wiki sayfasını düzenle"
   comma_delimited_numbers: "Virgül ile ayrılmış numaralar"

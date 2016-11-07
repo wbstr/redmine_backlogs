@@ -15,7 +15,7 @@ en:
   backlogs_new_story_position_bottom: "bottom (requires restart)"
   backlogs_new_story_position_top: top
   backlogs_not_all_themes_are_supported: "Not all themes are supported."
-  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be applied)"
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: "Product backlog page settings"
   backlogs_points_burn_direction: "Points burn up/down"
   backlogs_product_backlog: "Product backlog"
