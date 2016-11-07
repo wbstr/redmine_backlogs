@@ -283,6 +283,14 @@ module Backlogs
         self.class.connection.select_all(_sql_for_droppables(Version.table_name))
       end
 
+      def default_story_tracker_id
+        project_level_default = rb_project_settings.default_story_tracker
+        return project_level_default if Backlogs.setting[:story_trackers].include?(project_level_default.to_s)
+
+        global_default = Backlogs.setting[:default_story_tracker]
+        return global_default.to_i if global_default
+      end
+
 private
 
       # Returns sql for getting a list of projects and for each project which releases/sprints stories from the corresponding
