@@ -15,6 +15,7 @@ ru:
   backlogs_new_story_position_bottom: "вниз (требует перезапуска)"
   backlogs_new_story_position_top: вверх
   backlogs_not_all_themes_are_supported: "Не все темы поддерживаются"
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: "Настройка страницы бэклога продукта"
   backlogs_points_burn_direction: "Баллов выполнено/осталось"
   backlogs_product_backlog: "Бэклог продукта"
@@ -71,6 +72,7 @@ ru:
   backlogs_story_tracker: "Трекеры историй"
   backlogs_task: Задача
   backlogs_task_tracker: "Трекер задач"
+  backlogs_use_globally_selected_default_story_tracker_for_project: "Use global setting"
   backlogs_wiki_template: "Шаблон для страницы спринта в Вики"
   button_edit_wiki: "Редактировать страницу Вики"
   comma_delimited_numbers: "Числа, разделенные запятыми"

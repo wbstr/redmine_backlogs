@@ -15,6 +15,7 @@ es:
   backlogs_new_story_position_bottom: "final (necesita reiniciar)"
   backlogs_new_story_position_top: inicio
   backlogs_not_all_themes_are_supported: "No están soportados todos los temas."
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: "Página de configuración del backlog del producto"
   backlogs_points_burn_direction: "Burn up/down de puntos"
   backlogs_product_backlog: "Backlog del producto"
@@ -71,6 +72,7 @@ es:
   backlogs_story_tracker: "Seguimiento de historias"
   backlogs_task: Tarea
   backlogs_task_tracker: "Seguimiento de tarea"
+  backlogs_use_globally_selected_default_story_tracker_for_project: "Use global setting"
   backlogs_wiki_template: "Plantilla para página de sprint"
   button_edit_wiki: "Editar wiki"
   comma_delimited_numbers: "Números delimitados por comas"

@@ -15,6 +15,7 @@ ja:
   backlogs_new_story_position_bottom: "下に (再起動が必要)"
   backlogs_new_story_position_top: 上に
   backlogs_not_all_themes_are_supported: 全てテーマがサポートされている訳ではありません
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: プロダクトバックログの画面設定
   backlogs_points_burn_direction: ポイントのバーンアップ/ダウン
   backlogs_product_backlog: プロダクトバックログ
@@ -71,6 +72,7 @@ ja:
   backlogs_story_tracker: ストーリーに利用するトラッカー
   backlogs_task: タスク
   backlogs_task_tracker: タスクとして利用のトラッカー
+  backlogs_use_globally_selected_default_story_tracker_for_project: "Use global setting"
   backlogs_wiki_template: スプリントのテンプレートのWikiページ
   button_edit_wiki: Wikiページの編集
   comma_delimited_numbers: "カンマで区切った数字(ex: 1,2,3,5,8,13,...)"

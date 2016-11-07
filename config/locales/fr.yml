@@ -15,6 +15,7 @@ fr:
   backlogs_new_story_position_bottom: "en bas"
   backlogs_new_story_position_top: "en haut"
   backlogs_not_all_themes_are_supported: "Tous les thèmes ne sont pas supportés."
+  backlogs_note_for_default_story_tracker_for_project: "(If you choose a tracker which is not a valid story tracker, the global setting will be used)"
   backlogs_pblpage_settings: "Préférences du Carnet de produit"
   backlogs_points_burn_direction: "Point du burn Haut/bas"
   backlogs_product_backlog: "Carnet de produit"
@@ -71,6 +72,7 @@ fr:
   backlogs_story_tracker: "Tracker de scénarios"
   backlogs_task: Tâches
   backlogs_task_tracker: "Tracker de tâches"
+  backlogs_use_globally_selected_default_story_tracker_for_project: "Use global setting"
   backlogs_wiki_template: "Maquette pour page wiki des itérations"
   button_edit_wiki: "Editer la page du wiki"
   comma_delimited_numbers: "Nombres délimités par des virgules"
