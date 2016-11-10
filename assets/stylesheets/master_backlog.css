@@ -541,10 +541,20 @@ ul li { vertical-align: bottom; } /* close IE7 gap between list items */
   max-width:80px;
   float: left;
 }
+#backlogs_container .stories .story.editing .description.editor,
 #backlogs_container .stories .story.editing .subject.editor{
   font-size: 11px;
   margin:0;
   padding: 4px 4px 4px 4px;
+}
+#backlogs_container .stories .story.editing .description.editor{
+  height: 120px;
+  margin-top: 5px;
+  margin-left: 80px;
+}
+#backlogs_container .stories .story.editing .assigned_to_id.editor{
+  margin-top: 5px;
+  margin-left: 80px;
 }
 #backlogs_container .stories .story.editing .status_id{
   margin:0;
