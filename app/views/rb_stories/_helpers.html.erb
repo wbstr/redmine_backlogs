@@ -27,6 +27,11 @@
   <option value="<%= @project.id %>"><%= @project.name %></option>
 </select>
 
+<select class="assigned_to_id helper" id="assigned_to_id_options">
+  <option value=""> </option>
+  <%= users_assignable_options_for_select(@project.assignable_users) %>
+</select>
+
 <div id="story_template">
   <%= render :partial => 'rb_stories/story', :object => RbStory.new %>
 </div>

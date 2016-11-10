@@ -83,7 +83,7 @@ RB.Model = RB.Object.create({
     
     // 'this' can change below depending on the context.
     var self = this;
-    
+
     this.$.find('.editable').each(function(index){
       var field = RB.$(this);
       var fieldType = field.attr('fieldtype') ? field.attr('fieldtype') : 'input';
@@ -115,6 +115,10 @@ RB.Model = RB.Object.create({
                        });
         // So that we won't need a datepicker button to re-show it
         input.bind('mouseup', function(event){ RB.$(this).datepicker("show"); });
+      }
+
+      if (fieldType == 'textarea') {
+        input.attr('placeholder', fieldLabel);
       }
       
       // Copy the value in the field to the input element

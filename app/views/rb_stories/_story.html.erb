@@ -50,5 +50,11 @@
     <%= render :partial => "backlogs/model_errors", :object => story.errors unless story.errors.empty? %>
   </div>
  </div>
+ <div style="display: none;">
+  <span class="description editable" fieldname="description" fieldtype="textarea" fieldlabel="<%=l(:field_description)%>"><%=h story.description %></span>
+  <div class="assigned_to_id editable" fieldname="assigned_to_id" fieldtype="select" fieldlabel="<%=l(:field_assigned_to)%>">
+   <div class="v"><%= story.assigned_to_id %></div>
+  </div>
+ </div>
   <div class="clearfix"></div>
 </li>
