@@ -42,9 +42,37 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
 
     this.setAllowedStatuses(tracker, status);
     tracker.change(function() { self.setAllowedStatuses(tracker, status); });
-    var l = editor.children(':first').insertAfter(editor.find('.tracker_id.editor'));
-    editor.children(':first').insertAfter(l);
-    editor.find('.subject.editor, .description.editor').width(this.$.find('.fff-wrapmiddle').width()-200);
+
+    var groupIds = [];
+    var groupContainers = {};
+
+    // create group containers in memory
+    editor.children().each(function(){
+      var field = RB.$(this);
+      var groupId = field.attr('fieldgroupid');
+      if (groupId && !groupContainers[groupId]) {
+        var groupContainer = RB.$(document.createElement("div")).addClass('fieldgroup').addClass(groupId);
+        groupContainers[groupId] = groupContainer;
+        groupIds.push(groupId);
+      }
+    });
+
+    // append group container divs to editor in group id's natural order
+    RB.$.each(groupIds.sort().reverse(), function(index, groupId){
+      var groupContainer = groupContainers[groupId];
+      editor.prepend(groupContainer);
+    });
+
+    // move fields with group id into their group containers
+    editor.children().each(function(){
+      var field = RB.$(this);
+      var groupId = field.attr('fieldgroupid');
+      if (groupId) {
+        var groupContainer = groupContainers[groupId];
+        groupContainer.append(field);
+      }
+    });
+
     var name = editor.find('.name.editor');
     name.width(parseInt(name.attr('_rb_width'),10) - 10);
   },

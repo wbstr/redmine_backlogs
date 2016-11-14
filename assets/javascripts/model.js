@@ -93,12 +93,14 @@ RB.Model = RB.Object.create({
       var fieldType = field.attr('fieldtype') ? field.attr('fieldtype') : 'input';
       var fieldName = field.attr('fieldname');
       var fieldLabel = field.attr('fieldlabel');
+      var fieldGroupId = field.attr('fieldgroupid');
       var input;
-      
-      RB.$(document.createElement("label")).text(fieldLabel).appendTo(editor);
+
+      RB.$(document.createElement("label")).attr('fieldgroupid', fieldGroupId).text(fieldLabel).appendTo(editor);
       input = fieldType=='select' ? RB.$('#' + fieldName + '_options').clone(true) : RB.$(document.createElement(fieldType));
       input.removeAttr('id');
       input.attr('name', fieldName);
+      input.attr('fieldgroupid', fieldGroupId);
       input.addClass(fieldName);
       input.addClass('editor');
       input.removeClass('template');

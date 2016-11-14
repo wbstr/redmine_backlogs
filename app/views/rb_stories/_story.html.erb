@@ -5,12 +5,12 @@
      <% if show_category %>
          <% category_style = story.category ? 'display: inline;' : 'display: none;' %>
          <div style="display: inline; white-space: nowrap;">
-         <div class="editable category" fieldtype="select" fieldname="category_id" style="<%= category_style %>">
+         <div class="editable category" fieldtype="select" fieldname="category_id" style="<%= category_style %>" fieldgroupid="fg1_top_left">
            <div class="t" style="display: inline"><%= h story.category.to_s+' - ' if story.category %></div>
            <div class="v"><%= story.category.id if story.category %></div>
          </div>
      <%end%>
-     <span class="editable subject" fieldname="subject" fieldlabel="<%=l(:field_subject)%>" fieldtype="textarea"><%=h story.subject %></span>
+     <span class="editable subject" fieldname="subject" fieldlabel="<%=l(:field_subject)%>" fieldtype="textarea" fieldgroupid="fg2_top_center"><%=h story.subject %></span>
      <% if show_category %>
           </div>
       <% end %>
@@ -43,20 +43,20 @@
     <div class="v"><%= story.project_id %></div>
   </div>
 
-  <div class="tracker_id editable story_field" fieldtype="select" fieldname="tracker_id" fieldlabel="<%=l(:field_tracker_id)%>">
+  <div class="tracker_id editable story_field" fieldtype="select" fieldgroupid="fg1_top_left" fieldname="tracker_id" fieldlabel="<%=l(:field_tracker_id)%>">
     <div class="t"><%= h tracker_name_or_empty(story) %></div>
     <div class="v"><%= tracker_id_or_empty(story) %></div>
   </div>
  </div>
  <div class="fff-right">
-  <div class="status_id editable story_field" fieldtype="select" fieldname="status_id" fieldlabel="<%=l(:field_status_id)%>">
+  <div class="status_id editable story_field" fieldtype="select" fieldgroupid="fg3_top_right" fieldname="status_id" fieldlabel="<%=l(:field_status_id)%>">
     <div class="t"><%= status_label_or_default(story) %></div>
     <div class="v"><%= status_id_or_default(story) %></div>
   </div>
   <% if Backlogs.setting[:story_points].blank? %>
   <div class="story_points editable story_points_text story_field" fieldname="story_points" fieldlabel="<%=l(:story_points)%>" fieldtype="input"><%= story_points_or_empty(story) %></div>
   <% else %>
-  <div class="story_points editable story_points_select story_field" fieldtype="select" fieldname="story_points" fieldlabel="<%=l(:story_points)%>">
+  <div class="story_points editable story_points_select story_field" fieldtype="select" fieldgroupid="fg3_top_right" fieldname="story_points" fieldlabel="<%=l(:story_points)%>">
     <% %w(t v).each do |c| %>
       <div class="<%=h c %>"><%= story_points_or_empty(story) %></div>
     <% end %>
@@ -75,8 +75,8 @@
   </div>
  </div>
  <div style="display: none;">
-  <span class="description editable" fieldname="description" fieldtype="textarea" fieldlabel="<%=l(:field_description)%>"><%=h story.description %></span>
-  <div class="assigned_to_id editable" fieldname="assigned_to_id" fieldtype="select" fieldlabel="<%=l(:field_assigned_to)%>">
+  <span class="description editable" fieldname="description" fieldtype="textarea" fieldgroupid="fg4_middle" fieldlabel="<%=l(:field_description)%>"><%=h story.description %></span>
+  <div class="assigned_to_id editable" fieldname="assigned_to_id" fieldtype="select" fieldgroupid="fg5_bottom" fieldlabel="<%=l(:field_assigned_to)%>">
    <div class="v"><%= story.assigned_to_id %></div>
   </div>
  </div>
