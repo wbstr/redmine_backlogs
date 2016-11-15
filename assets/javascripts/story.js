@@ -43,6 +43,37 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
     this.setAllowedStatuses(tracker, status);
     tracker.change(function() { self.setAllowedStatuses(tracker, status); });
 
+    var fields = {};
+    editor.children('[fieldgroupid]').each(function(){
+      var field = RB.$(this);
+      var groupId = field.attr('fieldgroupid') || null;
+      var group = fields[groupId] || (fields[groupId] = {});
+      var positionInGroup = field.attr('positioninfieldgroup') || null;
+      group[positionInGroup] = RB.$(this);
+    });
+
+    console.log('fields', fields);
+
+    var lastContainer;
+    RB.$.each(fields, function(groupId, value){
+      var groupContainer = RB.$(document.createElement("div")).addClass('fieldgroup').addClass(groupId);
+      if (lastContainer == undefined) {
+        console.log("prepending ", groupId);
+        lastContainer = editor.prepend(groupContainer);
+      } else {
+        console.log("insertAfter ", groupId);
+        lastContainer = groupContainer.insertAfter(lastContainer);
+      }
+
+      RB.$.each(fields[groupId], function(position, fieldInGroup){
+        lastContainer.append(fieldInGroup);
+      });
+    });
+ //Object.keys(a).sort()
+
+/*
+
+
     var groupIds = [];
     var groupContainers = {};
 
@@ -72,7 +103,7 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
         groupContainer.append(field);
       }
     });
-
+*/
     var name = editor.find('.name.editor');
     name.width(parseInt(name.attr('_rb_width'),10) - 10);
   },
