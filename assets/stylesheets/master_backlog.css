@@ -534,28 +534,19 @@ ul li { vertical-align: bottom; } /* close IE7 gap between list items */
 #backlogs_container .stories .story.editing .editors .fieldgroup{
   display: inline-block;
   vertical-align: top;
-  padding: 0;
-  margin-top: 4px;
-}
-#backlogs_container .stories .story.editing .editors .fieldgroup.fg1_top_left{
-  margin-left: 4px;
-  width: 20%;
-}
-#backlogs_container .stories .story.editing .editors .fieldgroup.fg2_top_center{
-  margin-left: 4px;
-  margin-right: 4px;
-  width: calc(60% - 16px); /* because of the 4x4px margin */
-}
-#backlogs_container .stories .story.editing .editors .fieldgroup.fg3_top_right{
-  width: 20%;
-  margin-right: 4px;
-}
-#backlogs_container .stories .story.editing .editors .fieldgroup.fg4_middle{
-  margin: 0 4px;
-  width: calc(100% - 8px);
-}
-#backlogs_container .stories .story.editing .editors .fieldgroup.fg5_bottom{
+  /*padding: 0;*/
+  /*margin-top: 4px;*/
   margin: 4px;
+}
+#backlogs_container .stories .story.editing .editors .fieldgroup.fg1{
+  /*margin-left: 4px;*/
+  /*width: 20%;*/
+  width: 75%;
+}
+#backlogs_container .stories .story.editing .editors .fieldgroup.fg2{
+  margin-left: 0;
+  /*margin-right: 4px;*/
+  width: calc(25% - 12px);
 }
 #backlogs_container .stories .story.editing .editor{
   display: block;
@@ -568,7 +559,7 @@ ul li { vertical-align: bottom; } /* close IE7 gap between list items */
 #backlogs_container .stories .story.editing .description.editor,
 #backlogs_container .stories .story.editing .subject.editor{
   font-size: 11px;
-  margin:0;
+  margin:0 0 4px 0;
   padding: 2px 4px;
   float: none;
   height: 36px;
@@ -580,11 +571,13 @@ ul li { vertical-align: bottom; } /* close IE7 gap between list items */
 }
 #backlogs_container .stories .story.editing .assigned_to_id.editor{
   margin: 0;
+  width: 100%;
 }
 #backlogs_container .stories .story.editing .status_id{
   margin:0;
   margin-bottom: 4px;
   width: 100%;
+  padding-left: 0;
 }
 #backlogs_container .stories .story.editing select.story_points.editor {
   margin:0;
@@ -613,7 +606,7 @@ ul li { vertical-align: bottom; } /* close IE7 gap between list items */
 #backlogs_container .stories .editing .edit-actions {
   clear: both;
   display: inline-block;
-  float: right;
+  float: left;
   margin: 4px 5px;
 }
 #backlogs_container .editing .edit-actions a {

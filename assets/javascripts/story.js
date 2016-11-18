@@ -49,61 +49,35 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
       var groupId = field.attr('fieldgroupid') || null;
       var group = fields[groupId] || (fields[groupId] = {});
       var positionInGroup = field.attr('positioninfieldgroup') || null;
+      if (positionInGroup) { positionInGroup = +positionInGroup; }
       group[positionInGroup] = RB.$(this);
     });
 
-    console.log('fields', fields);
-
     var lastContainer;
-    RB.$.each(fields, function(groupId, value){
+    Object.keys(fields).sort().forEach(function(groupId){
+      // create group containers and prepend them to editor in group id's natural order
       var groupContainer = RB.$(document.createElement("div")).addClass('fieldgroup').addClass(groupId);
       if (lastContainer == undefined) {
-        console.log("prepending ", groupId);
-        lastContainer = editor.prepend(groupContainer);
+        editor.prepend(groupContainer);
+        lastContainer = groupContainer;
       } else {
-        console.log("insertAfter ", groupId);
-        lastContainer = groupContainer.insertAfter(lastContainer);
+        groupContainer.insertAfter(lastContainer);
+        lastContainer = groupContainer;
       }
 
-      RB.$.each(fields[groupId], function(position, fieldInGroup){
-        lastContainer.append(fieldInGroup);
-      });
-    });
- //Object.keys(a).sort()
-
-/*
-
-
-    var groupIds = [];
-    var groupContainers = {};
-
-    // create group containers in memory
-    editor.children().each(function(){
-      var field = RB.$(this);
-      var groupId = field.attr('fieldgroupid');
-      if (groupId && !groupContainers[groupId]) {
-        var groupContainer = RB.$(document.createElement("div")).addClass('fieldgroup').addClass(groupId);
-        groupContainers[groupId] = groupContainer;
-        groupIds.push(groupId);
-      }
+      // move fields with group id into their group containers in positioninfieldgroup' numerical order
+      Object.keys(fields[groupId])
+        .sort(function(pos1, pos2){
+          if (!pos1) { return -1; }
+          if (!pos2) { return 1; }
+          var intPos1 = parseInt(pos1, 10);
+          var intPos2 = parseInt(pos2, 10);
+          return intPos1 - intPos2;
+        }).forEach(function(position){
+          lastContainer.append(fields[groupId][position]);
+        });
     });
 
-    // append group container divs to editor in group id's natural order
-    RB.$.each(groupIds.sort().reverse(), function(index, groupId){
-      var groupContainer = groupContainers[groupId];
-      editor.prepend(groupContainer);
-    });
-
-    // move fields with group id into their group containers
-    editor.children().each(function(){
-      var field = RB.$(this);
-      var groupId = field.attr('fieldgroupid');
-      if (groupId) {
-        var groupContainer = groupContainers[groupId];
-        groupContainer.append(field);
-      }
-    });
-*/
     var name = editor.find('.name.editor');
     name.width(parseInt(name.attr('_rb_width'),10) - 10);
   },
