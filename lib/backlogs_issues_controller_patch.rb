@@ -21,11 +21,14 @@ module Backlogs
     module InstanceMethods
       def add_backlogs_fields
         story_trackers = RbStory.trackers
+        task_and_story_trackers = story_trackers + [RbTask.tracker]
 
         case params[:format]
           when 'xml'
             body = Nokogiri::XML(response.body)
             body.xpath('//issue').each{|issue|
+              next unless task_and_story_trackers.include?(Integer(issue.at('.//tracker')['id']))
+              issue << body.create_element('position', RbStory.find(issue.at('.//id').text).position.to_s)
               next unless story_trackers.include?(Integer(issue.at('.//tracker')['id']))
               issue << body.create_element('story_points', RbStory.find(issue.at('.//id').text).story_points.to_s)
               next unless RbStory.find(issue.at('.//id').text).release
@@ -37,10 +40,13 @@ module Backlogs
             jsonp = (request.params[:callback] || request.params[:jsonp]).to_s.gsub(/[^a-zA-Z0-9_]/, '')
             body = JSON.parse(jsonp.present? ? response.body.sub("#{jsonp}(","").chop : response.body)
             (body['issues'] || [body['issue']]).each{|issue|
+              next unless task_and_story_trackers.include?(issue['tracker']['id'])
+              issue['position'] = RbStory.find(issue['id']).position
               next unless story_trackers.include?(issue['tracker']['id'])
               issue['story_points'] = RbStory.find(issue['id']).story_points
               next unless RbStory.find(issue['id']).release
               issue['release'] = {:release => {:id=> RbStory.find(issue['id']).release_id, :name => RbStory.find(issue['id']).release.name}}
+
             }
             response.body = jsonp.present? ? "#{jsonp}(#{body.to_json})" : body.to_json
         end
